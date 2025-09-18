@@ -230,9 +230,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ETH_Init();
+  ///MX_ETH_Init();
   MX_USART3_UART_Init();
-  MX_USB_OTG_FS_PCD_Init();
+  //MX_USB_OTG_FS_PCD_Init();
   MX_TIM6_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
@@ -343,8 +343,8 @@ void CANOpen_WheelMotorDrive_Init(void)
 	CANOpen_ProfileDecelerationOD_Set(2);
 
 	// step6) sync  flagActServoEnable 
-	//CANOpen_ControlWordOD_ServoEnable_Set(1);
-	//CANOpen_ControlWordOD_ServoEnable_Set(2);
+	CANOpen_ControlWordOD_ServoEnable_Set(1);
+	CANOpen_ControlWordOD_ServoEnable_Set(2);
 }
 
 void CANOpen_WheelMotorDriveParam_Set(void)		// It's not completed.
