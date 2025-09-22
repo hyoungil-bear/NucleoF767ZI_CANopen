@@ -25,9 +25,11 @@
 #include "usb_otg.h"
 #include "gpio.h"
 
+
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "od_common.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -234,11 +236,13 @@ int main(void)
   MX_USART3_UART_Init();
   //MX_USB_OTG_FS_PCD_Init();
   MX_TIM6_Init();
-  MX_CAN1_Init();
+  //MX_CAN1_Init();
+  
   /* USER CODE BEGIN 2 */
-  CANOpen_WheelMotorDrive_Init();			// CANOpen wheel Motor Drive
-
   HAL_TIM_Base_Start_IT(&htim6);			// CANOpen Target Velocity
+
+  //CANOpen_WheelMotorDrive_Init();			// CANOpen wheel Motor Drive
+
 
   /* USER CODE END 2 */
 
@@ -248,9 +252,10 @@ int main(void)
   {
     gu32IdleLoopCount++;
 
+
 	// CANOpen forced brake control
-	CANOpen_ServoEnableControl();
-	CANOpen_BrakeReleaseForceControl();
+	//CANOpen_ServoEnableControl();
+	//CANOpen_BrakeReleaseForceControl();
 	
 	//HAL_Delay(1);
 
@@ -841,6 +846,7 @@ uint8_t CANOpen_TxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader,
 	return rVal;
 }
 
+#if 0
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
   gu32Can1RxCount++;
@@ -883,7 +889,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	  gau16CANOpen_ErrorCode[1] = (uint16_t)((CanRxData[7]<<8) | (CanRxData[6]<<0));
   }
 }
-
+#endif
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {  
   if(htim->Instance == htim6.Instance) 
